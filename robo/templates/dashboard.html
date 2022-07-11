@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %} Dashboard {% endblock %}
+{% block content %} 
+<div class="jumbotron" >
+    <h1>Welcome To {{ user.username }} Dashboard</h1>
+    <br>
+    <h4>Click below to fill the Risk Profile Form</h4>
+
+    <a class="btn btn-primary" href="{{url_for('quiz.quiz_form')}}" role="button">Form</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% if risk_analysis_results %}
+        You have submitted quiz
+        <div id='chart' class='chart'”></div>
+        <br>
+        <div>
+            <h4>Retirement</h4>
+            {% if education_results %}
+                You Have Filled Form
+
+            {% else %} 
+
+                You Have Not Filled Form. Click bellow to fill it
+                <br>
+                <a class="btn btn-primary" href="#" role="button">Form</a>
+
+            {% endif %}
+        </div>
+        <br>
+        <br>
+        <div>
+            <h4>Children's Education</h4>
+            {% if education_table_info %}
+                To Achieve your Children' Education Goal you have to save <b>{{education_results_content['saving_amount']}}</b> on <b>{{education_results_content['interval']}}</b> basis.
+                <br>
+                Click below to change your Goal
+                <br>
+                <a class="btn btn-success" href="{{url_for('calculator.education_page')}}" role="button">Form</a>
+            {% else %} 
+
+                You Have Not Filled Form. Click bellow to fill it
+                <br>
+                <a class="btn btn-primary" href="{{url_for('calculator.education_page')}}" role="button">Form</a>
+
+            {% endif %}
+        </div>
+        <br>
+        <br>
+
+        <div>
+            <h4>Children's Marriage</h4>
+            {% if marriage_table_info %}
+                To Achieve your Child's Marriage Goal you have to save <b>{{marriage_results_content['saving_amount']}}</b> on <b>{{marriage_results_content['interval']}}</b> basis.
+                <br>
+                Click below to change your Goal
+                <br>
+                <a class="btn btn-success" href="{{url_for('calculator.marriage_page')}}" role="button">Form</a>
+
+            {% else %} 
+
+                You Have Not Filled Form. Click bellow to fill it
+                <br>
+                <a class="btn btn-primary" href="{{url_for('calculator.marriage_page')}}" role="button">Form</a>
+
+            {% endif %}
+        </div>
+        <br>
+        <br>
+
+        <div>
+            <h4>Vacation</h4>
+            {% if vacation_table_info %}
+                To Achieve your Vacation Goal you have to save <b>{{vacation_results_content['saving_amount']}}</b> on <b>{{vacation_results_content['interval']}}</b> basis.
+                <br>
+                Click below to change your Goal
+                <br>
+                <a class="btn btn-success" href="{{url_for('calculator.vacation_page')}}" role="button">Form</a>
+
+            {% else %} 
+
+                You Have Not Filled Form. Click bellow to fill it
+                <br>
+                <a class="btn btn-primary" href="{{url_for('calculator.vacation_page')}}" role="button">Form</a>
+
+            {% endif %}
+        </div>
+        <br>
+        <br>
+
+        <div>
+            <h4>House Down Payment Planning</h4>
+            {% if housedownpayment_table_info %}
+                To Achieve your House Down Payment Goal you have to save <b>{{housedownpayment_results_content['saving_amount']}}</b> on <b>{{housedownpayment_results_content['interval']}}</b> basis.
+                Click below to change your Goal
+                <br>
+                <a class="btn btn-success" href="{{url_for('calculator.housedownpayment_page')}}" role="button">Form</a>
+
+            {% else %} 
+
+                You Have Not Filled Form. Click bellow to fill it
+                <br>
+                <a class="btn btn-primary" href="{{url_for('calculator.housedownpayment_page')}}" role="button">Form</a>
+
+            {% endif %}
+        </div>
+        <br>
+        <br>
+
+        <div>
+            <h4>Wealth Creation</h4>
+            {% if wealthcreation_table_info %}
+                By investing {{wealthcreation_results_content['current_sip']}} on <b>{{wealthcreation_results_content['interval']}}</b> basis your total Investment gain will be <b>{{wealthcreation_results_content['total_investment_gains']}}</b> and present value of your total amount will be <b>{{wealthcreation_results_content['present_value']}}</b>
+                Click below to change your Goal
+                <br>
+                <a class="btn btn-success" href="{{url_for('calculator.wealthcreation_page')}}" role="button">Form</a>
+            {% else %} 
+
+                You Have Not Filled Form. Click bellow to fill it
+                <br>
+                <a class="btn btn-primary" href="{{url_for('calculator.wealthcreation_page')}}" role="button">Form</a>
+
+            {% endif %}
+        </div>
+
+    {% else %}
+        You have not submitted quiz yet
+
+    {% endif %}
+</div>
+
+{% endblock %}
+
+
+
+
+{% block plot %} 
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>
+
+{% endblock %}
+
+
+
+

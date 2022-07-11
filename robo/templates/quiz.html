@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %} Quiz {% endblock %} 
+{% block content %}
+    <div class = 'jumbotron'>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <h1 align = 'center'>
+                Risk Assessment
+                <br><br>
+            </h1>
+            <h5>
+                This QA will analyse your psychology towards market and investment. <br>
+                After filling this quiz, you can get to know that which type of investment suits you best.
+                <br>
+
+            </h5>
+            <br>
+            1. 
+            {{ form.question1.label() }}
+            {{ form.question1(class="form-check") }}
+            <br><hr><br>
+
+            2.
+            {{ form.question2.label() }}
+            {{ form.question2(class="form-check") }}
+            <br><hr><br>
+            3.
+            {{ form.question3.label() }}
+            {{ form.question3(class="form-check") }}
+            <br><hr><br>
+            4.
+            {{ form.question4.label() }}
+            {{ form.question4(class="form-check") }}
+            <br><hr><br>
+            5.
+            {{ form.question5.label() }}
+            {{ form.question5(class="form-check") }}
+            <br><hr><br>
+            6.
+            {{ form.question6.label() }}
+            {{ form.question6(class="form-check") }}
+            <br><hr><br>
+            7.
+            {{ form.question7.label() }}
+            {{ form.question7(class="form-check") }}
+            <br><hr><br>
+            8.
+            {{ form.question8.label() }}
+            {{ form.question8(class="form-check") }}
+            <br><hr><br>
+            9.
+  
+            {{ form.question9.label() }}
+            {{ form.question9(class="form-check") }}
+            <br><hr><br>
+            10.
+            {{ form.question10.label() }}
+            {{ form.question10(class="form-check") }}
+            <br><hr><br>
+            11.
+            {{ form.question11.label() }}
+            {{ form.question11(class="form-check") }}
+            <br><hr><br>
+            12.
+            {{ form.question12.label() }}
+            {{ form.question12(class="form-check") }}
+            <br><hr><br>
+            13.
+            {{ form.question13.label() }}
+            {{ form.question13(class="form-check") }}
+            <br><hr><br>
+            14.
+            {{ form.question14.label() }}
+            {{ form.question14(class="form-check") }}
+            <br><hr><br>
+
+            <br>
+
+            {{ form.submit() }}
+        </form>
+    </div>
+</body>
+{% endblock %}

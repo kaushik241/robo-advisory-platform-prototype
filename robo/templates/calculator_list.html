@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <div class="jumbotron">
+        <h1>Select one to plan your future</h1>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Retirement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('calculator.education_page')}}">Children's Education</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href = "{{url_for('calculator.marriage_page')}}">Children's Marriage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href = "{{url_for('calculator.vacation_page')}}">Vacation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href = "{{url_for('calculator.housedownpayment_page')}}">House Down Payment</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href = "{{url_for('calculator.wealthcreation_page')}}">Wealth Creation</a>
+            </li>
+          </ul>
+    </div>
+
+{% endblock %}

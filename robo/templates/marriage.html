@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class = 'jumbotron'>
+        <h4>Considering your risk appetite we have taken
+            <br>
+            Annual Rate of Return = {{accumulation_return*100}}%
+            <br>
+            Inflation = 6.00%
+            <br>
+        </h4>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <h1>
+                Please Enter the details
+            </h1>
+            <br>
+            {{ form.amount.label() }}
+            {{ form.amount(class="form-control", placeholder="Amount") }}
+
+            {{ form.time.label() }}
+            {{ form.time(class="form-control", placeholder="Time(Years)") }}
+
+            {{ form.deposit_freq.label() }}
+            {{ form.deposit_freq(class="form-check", placeholder="Deposit Frequency") }}
+
+            {{ form.compound_freq.label() }}
+            {{ form.compound_freq(class="form-check", placeholder="Compound Frequency") }}
+
+
+            <br>
+
+            {{ form.submit() }}
+        </form>
+    </div>
+</body>
+{% endblock %}
+
+
+
