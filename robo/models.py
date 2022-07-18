@@ -172,6 +172,41 @@ class WealthCreationTable(db.Model):
         return f'Owner {self.owner}'
 
 
+class RetirementTable(db.Model):
+    __tablename__ = 'retirement'
+    id = db.Column(db.Integer(), primary_key=True)
+    current_age = db.Column(db.Integer())
+    age_at_retirement = db.Column(db.Integer())
+    years_to_payout = db.Column(db.Integer())
+    returns_during_accumulation = db.Column(db.Float())
+    returns_after_retirement = db.Column(db.Float())
+    annual_inflation_rate = db.Column(db.Float())
+    current_annual_salary = db.Column(db.Float())
+    annual_increase_in_salary = db.Column(db.Float())
+    percentage_of_salary_contributed = db.Column(db.Float())
+    salary_during_retirement = db.Column(db.Float())
+    current_retirement_saving_balance = db.Column(db.Float())
+    owner = db.Column(db.Integer(), db.ForeignKey('users.id'))
+
+    def __init__(self,current_age, age_at_retirement, years_to_payout, returns_during_accumulation, returns_after_retirement, annual_inflation_rate, current_annual_salary, annual_increase_in_salary, percentage_of_salary_contributed, salary_during_retirement, current_retirement_saving_balance, owner):
+        self.current_age = current_age
+        self.age_at_retirement = age_at_retirement
+        self.years_to_payout = years_to_payout
+        self.returns_during_accumulation = returns_during_accumulation
+        self.returns_after_retirement = returns_after_retirement
+        self.annual_inflation_rate = annual_inflation_rate
+        self.current_annual_salary = current_annual_salary
+        self.annual_increase_in_salary = annual_increase_in_salary
+        self.percentage_of_salary_contributed = percentage_of_salary_contributed
+        self.salary_during_retirement = salary_during_retirement
+        self.current_retirement_saving_balance = current_retirement_saving_balance
+        self.owner = owner
+    
+
+    def __repr__(self):
+        return f'Owner {self.owner}'
+
+
 
 class Questions(db.Model):
     __tablename__ = 'questions'

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+    Retirement Page
+{% endblock %}
+
+{% block content %}
+    <div class = 'jumbotron'>
+        <h4>Considering your risk appetite we have taken
+            <br>
+            Annual Rate of Return = {{accumulation_return*100}}%
+            <br>
+            Annual Rate of Return after Retirement = {{retirement_return*100}}%
+            <br>
+            Inflation = 6.00%
+            <br>
+        </h4>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <h1>
+                Please Enter the details
+            </h1>
+            <br>
+
+            {{ form.current_age.label()}}
+            {{form.current_age(class = 'form-control', placeholder = 'Current Age')}}
+
+            {{ form.age_at_retirement.label() }}
+            {{ form.age_at_retirement(class = 'form-control', placeholder ='Current Age')}}
+
+            {{ form.years_to_payout.label() }}
+            {{ form.years_to_payout(class = 'form-control', placeholder = 'Years To Payout')}}
+
+            {{ form.current_annual_salary.label() }}
+            {{ form.current_annual_salary(class = 'form-control', placeholder = 'Current Annual Salary')}}
+
+            {{ form.annual_increase_in_salary.label() }}
+            {{ form.annual_increase_in_salary(class = 'form-control', placeholder = 'Annual Increase in Salary')}}
+
+            {{ form.percentage_of_salary_contributed.label()}}
+            {{ form.percentage_of_salary_contributed(class = 'form-control' ,placeholder = 'Percentage of Salary Contributed' )}}
+
+            {{ form.salary_during_retirement.label()}}
+            {{ form.salary_during_retirement(class = 'form-control', placeholder = 'Salary During Retirement')}}
+
+            {{ form.current_retirement_saving_balance.label()}}
+            {{ form.current_retirement_saving_balance(class = 'form-control', placeholder = 'Current Retirement Saving Balance')}}
+
+            <br>
+
+            {{ form.submit() }}
+            
+        </form>
+    </div>
+</body>
+{% endblock %}

@@ -243,14 +243,14 @@ class Calculation:
         df_accumulation_and_df_retirement_balanced.fillna(0,inplace = True)
 
         #for calcuating comparision dataframe
-        df_comparision = pd.DataFrame(columns = ['Year','Current Approch', 'Modified(Balanced) Approch'])
-        df_comparision['Year'] = df_accumulation_and_df_retirement['Year']
+        #for calcuating comparision dataframe
+        df_comparision = pd.DataFrame(columns = ['Current Approch', 'Modified(Balanced) Approch'])
+        df_comparision['Age'] = df_accumulation_and_df_retirement['Age']
         df_comparision['Current Approch'] = df_accumulation_and_df_retirement['Balance']
 
         df_comparision['Modified(Balanced) Approch'] = df_accumulation_and_df_retirement_balanced['Balance']
-        df_comparision.set_index('Year',inplace = True)
-        
-        return df_comparision
+        df_comparision.set_index('Age',inplace = True)
+        return (df_comparision, {'shortfall_at_retirement':shortfall_at_retirement,'years_pay_out_will_last':years_pay_out_will_last,'additional_annual_saving':additional_annual_saving,'percent_of_salary_contributed_balanced':percent_of_salary_contributed_balanced})
 
 
 #######################################################################################################################################################################
@@ -286,7 +286,6 @@ class FinancialPlanner:
             self.type_of_investor = 'Aggressive'
             
         
-       
     def asset_allocation(self):
         self.type_after_assessing_risk()
         df_asset_allocation_before_retirement_local = self.df_asset_allocation_before_retirement.set_index('Types')

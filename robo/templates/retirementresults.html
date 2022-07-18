@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block plot %} 
+
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>
+
+{% endblock %}
+{% block content %} 
+    <div class="jumbotron">
+        <h3>Retirement Results</h3>
+        <div id='chart' class='chart'”></div>
+    </div>
+
+
+
+{% endblock %}

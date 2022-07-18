@@ -140,6 +140,7 @@ def dashboard():
             wealthcreation_results_content = None
             vacation_results_content = None 
             housedownpayment_results_content = None
+            
 
             if education_table_info:
                 calculations = Calculation(annual_rate = education_table_info.annual_rate, 
