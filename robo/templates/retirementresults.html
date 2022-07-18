@@ -11,7 +11,21 @@
 {% block content %} 
     <div class="jumbotron">
         <h3>Retirement Results</h3>
+        <br>
+        Short Fall at Retirement: {{ results_info['shortfall_at_retirement']}}
+        {% if results_info['shortfall_at_retirement'] > 0 %}
+            <br>
+            Years Pay Out will Last:{{results_info['years_pay_out_will_last']}}
+            <br>
+            Additional Annual Savings: {{results_info['additional_annual_saving']}}
+            <br>
+            Percentage of Salary Contribution Required: {{results_info['percent_of_salary_contributed_balanced']}}
+
+        {% else %}
+            You Do Not Need to Worry You are right on Track
+        {% endif %}
         <div id='chart' class='chart'”></div>
+
     </div>
 
 

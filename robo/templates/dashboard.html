@@ -15,19 +15,29 @@
         You have submitted quiz
         <div id='chart' class='chart'”></div>
         <br>
-        <div>
-            <h4>Retirement</h4>
-            {% if education_results %}
-                You Have Filled Form
-
-            {% else %} 
-
-                You Have Not Filled Form. Click bellow to fill it
+        <br>
+        <h4>Retirement Plan</h4>
+        {% if retirement_table_info %}
+            {% if retirement_results_content['shortfall_at_retirement'] > 0 %}
+                You are not on Track to achieve your Retirement Goal.
                 <br>
-                <a class="btn btn-primary" href="#" role="button">Form</a>
+                You additionally need to save <b>{{retirement_results_content['additional_annual_saving']}}</b> amount or {{retirement_results_content['percent_of_salary_contributed_balanced']}} % of your Salary.
 
+            {% else %}
+                You are on Track to achieve your Retirement Goal.
+                Your retirement plan is good to go. which is {{retirement_table_info['percentage_of_salary_contributed']}} % of your Salary.
             {% endif %}
-        </div>
+
+            <br>
+            <a class="btn btn-success" href="{{url_for('calculator.retirement_page')}}" role="button">Form</a>
+        {% else %} 
+
+            You Have Not Filled Form. Click bellow to fill it
+            <br>
+            <a class="btn btn-primary" href="{{url_for('calculator.retirement_page')}}" role="button">Form</a>
+
+        {% endif %}
+        <br>
         <br>
         <br>
         <div>
@@ -123,6 +133,8 @@
 
             {% endif %}
         </div>
+        <br>
+        <br>
 
     {% else %}
         You have not submitted quiz yet
@@ -144,6 +156,7 @@
 </script>
 
 {% endblock %}
+
 
 
 

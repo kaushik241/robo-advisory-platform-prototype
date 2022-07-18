@@ -245,6 +245,8 @@ def retirement_analysis_page():
                                     percent_of_salary_contributed=retirement_table_info.percentage_of_salary_contributed,
                                     salary_during_retirement=retirement_table_info.salary_during_retirement,
                                     current_retirement_saving_balance=retirement_table_info.current_retirement_saving_balance)
+
+    print(results_info)
     
     fig = px.line(results_df, title='See your retirement growth')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)

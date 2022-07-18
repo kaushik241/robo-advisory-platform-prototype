@@ -136,8 +136,10 @@ class Calculation:
         shortfall_at_retirement = needed_to_save_100_perc_retirement - value_of_current_saving_at_retirement - value_of_current_contribution_at_retirement 
 
         #to calculate how many year last
+        #to calculate how many year last
         rate = rate = (1 + returns_after_retirement)/(1 + annual_inflation) - 1
-        years_pay_out_will_last = npf.nper(rate, -inflation_adjusted_salary_at_retirement, -(needed_to_save_100_perc_retirement - shortfall_at_retirement))
+        years_pay_out_will_last = -npf.nper(rate, -inflation_adjusted_salary_at_retirement, -(needed_to_save_100_perc_retirement - shortfall_at_retirement))
+        print(years_pay_out_will_last)
 
         #to calculate payment for a goal
         if annual_increase_in_salary == returns_during_accumulation:
@@ -250,7 +252,7 @@ class Calculation:
 
         df_comparision['Modified(Balanced) Approch'] = df_accumulation_and_df_retirement_balanced['Balance']
         df_comparision.set_index('Age',inplace = True)
-        return (df_comparision, {'shortfall_at_retirement':shortfall_at_retirement,'years_pay_out_will_last':years_pay_out_will_last,'additional_annual_saving':additional_annual_saving,'percent_of_salary_contributed_balanced':percent_of_salary_contributed_balanced})
+        return (df_comparision, {'shortfall_at_retirement':round(shortfall_at_retirement,2),'years_pay_out_will_last':round(years_pay_out_will_last,2),'additional_annual_saving':round(additional_annual_saving,2),'percent_of_salary_contributed_balanced':round(percent_of_salary_contributed_balanced,2)})
 
 
 #######################################################################################################################################################################

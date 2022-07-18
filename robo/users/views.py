@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from robo import db
 from werkzeug.security import generate_password_hash,check_password_hash
-from robo.models import User,RiskProfile,Results,EducationTable, MarriageTable, HouseDownPaymentTable, VacationTable, WealthCreationTable
+from robo.models import User,RiskProfile,Results,EducationTable, MarriageTable, HouseDownPaymentTable, VacationTable, WealthCreationTable, RetirementTable
 from robo.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 import plotly
 import plotly.express as px
@@ -132,14 +132,18 @@ def dashboard():
         wealthcreation_table_info =  WealthCreationTable.query.filter_by(owner= current_user.get_id()).order_by(WealthCreationTable.id.desc()).first()
         vacation_table_info =  VacationTable.query.filter_by(owner= current_user.get_id()).order_by(VacationTable.id.desc()).first()
         housedownpayment_table_info =  HouseDownPaymentTable.query.filter_by(owner= current_user.get_id()).order_by(HouseDownPaymentTable.id.desc()).first()
+        retirement_table_info = RetirementTable.query.filter_by(owner = current_user.get_id()).order_by(RetirementTable.id.desc()).first()
+        user_risk_profile = RiskProfile.query.filter_by(owner= current_user.get_id()).order_by(RiskProfile.id.desc()).first()
+        print(retirement_table_info)
 
 
-        if education_table_info or marriage_table_info or wealthcreation_table_info or vacation_table_info or housedownpayment_table_info:
+        if education_table_info or marriage_table_info or wealthcreation_table_info or vacation_table_info or housedownpayment_table_info or retirement_table_info:
             education_results_content = None
             marriage_results_content = None
             wealthcreation_results_content = None
             vacation_results_content = None 
             housedownpayment_results_content = None
+            retirement_results_content = None
             
 
             if education_table_info:
@@ -189,12 +193,35 @@ def dashboard():
                 housedownpayment_results_content = {'saving_amount':round(housedownpayment_results,2), 'interval':housedownpayment_table_info.deposit_freq}
                 print(housedownpayment_results_content)
 
+            if retirement_table_info:
+                calculations = Calculation(
+                                annual_rate = retirement_table_info.returns_during_accumulation, 
+                                inflation = retirement_table_info.annual_inflation_rate
+                                )
+
+                retirement_results_df, retirement_results_content = calculations.retirement(current_age=retirement_table_info.current_age,age_at_retirement=retirement_table_info.age_at_retirement,
+                                                years_to_payout=retirement_table_info.years_to_payout,returns_during_accumulation=user_risk_profile.accumulation_return,
+                                                returns_after_retirement=user_risk_profile.retirement_return,
+                                                annual_inflation=0.06,
+                                                current_annual_salary=retirement_table_info.current_annual_salary,
+                                                annual_increase_in_salary=retirement_table_info.annual_increase_in_salary,
+                                                percent_of_salary_contributed=retirement_table_info.percentage_of_salary_contributed,
+                                                salary_during_retirement=retirement_table_info.salary_during_retirement,
+                                                current_retirement_saving_balance=retirement_table_info.current_retirement_saving_balance)
+
+            print(retirement_table_info)
+            print('High')
+            print('Hello')
+
+            
+
             return render_template('dashboard.html',user = user,risk_analysis_results = risk_analysis_results,graphJSON = graphJSON,
                             education_results_content = education_results_content,education_table_info = education_table_info,
                             vacation_results_content = vacation_results_content, vacation_table_info = vacation_table_info,
                             housedownpayment_results_content = housedownpayment_results_content, housedownpayment_table_info = housedownpayment_table_info,
                             marriage_results_content = marriage_results_content, marriage_table_info = marriage_table_info,
-                            wealthcreation_results_content = wealthcreation_results_content, wealthcreation_table_info = wealthcreation_table_info)
+                            wealthcreation_results_content = wealthcreation_results_content, wealthcreation_table_info = wealthcreation_table_info,
+                            retirement_table_info = retirement_table_info,retirement_results_content = retirement_results_content)
 
 
 
@@ -205,21 +232,5 @@ def dashboard():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
