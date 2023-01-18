@@ -61,6 +61,14 @@ def login():
     return render_template('login.html', form=form)
 
 
+###################################
+@users.route('/google_login', methods=['GET', 'POST'])
+
+
+
+
+
+################################
 
 
 @users.route("/logout")

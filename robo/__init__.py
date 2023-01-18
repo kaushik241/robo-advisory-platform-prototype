@@ -7,6 +7,7 @@ from flask_login import LoginManager
 
 
 
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'mysecret'
@@ -16,6 +17,8 @@ app.config['SECRET_KEY'] = 'mysecret'
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 
 
 db = SQLAlchemy(app)

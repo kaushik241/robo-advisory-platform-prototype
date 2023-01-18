@@ -508,12 +508,3 @@ def create_quiz():
     return render_template('index.html')
 
 
-
-
-
-
-
-        
-
-
-        
